@@ -33,13 +33,19 @@ const SKIRMISH_MAX_GROUPS_TOTAL = 4;
 const CLASH_MAX_GROUPS_TOTAL = 6;
 const BATTLE_MAX_GROUPS_TOTAL = 7;
 
-const MAX_GROUPS_FOR_GAME_SIZE = new Map<GameSize, number>({
-	[GameSize.Skirmish] : SKIRMISH_MAX_GROUPS_TOTAL,
-	[GameSize.Clash]    : CLASH_MAX_GROUPS_TOTAL,
-	[GameSize.Battle]   : BATTLE_MAX_GROUPS_TOTAL,
-});
+const MAX_GROUPS_FOR_GAME_SIZE = new Map<GameSize, number>([
+	[GameSize.Skirmish,     SKIRMISH_MAX_GROUPS_TOTAL],
+	[GameSize.Clash,        CLASH_MAX_GROUPS_TOTAL],
+	[GameSize.Battle,       BATTLE_MAX_GROUPS_TOTAL],
+]);
 
-export function maxGroupsForGameSize()
+export function maxGroupsForGameSize(gameSize: GameSize): number {
+	const size = MAX_GROUPS_FOR_GAME_SIZE.get(gameSize);
+	if (size) {
+		return size;
+	}
+	throw new ReferenceError(`No such game size ${gameSize}`)
+}
 
 type GroupNumbersMapping = Map<BattleGroupType, GroupSizing>;
 
@@ -92,8 +98,9 @@ const GAME_SIZE_BATTLE_GROUPS_MAPPING = new Map<GameSize, GroupNumbersMapping>([
 export function getMaximumOfBattleGroupsType(gameSize: GameSize, groupType: BattleGroupType): GroupSizing {
 	const groupMapping =GAME_SIZE_BATTLE_GROUPS_MAPPING.get(gameSize);
 	if (groupMapping) {
-		if (groupMapping.has(groupType)) {
-			return groupMapping.get(groupType);
+		const groupSizing = groupMapping.get(groupType);
+		if (groupSizing) {
+			return groupSizing
 		}
 		throw new ReferenceError(`No such group type ${groupType}`);
 	}
