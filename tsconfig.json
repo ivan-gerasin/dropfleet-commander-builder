@@ -1,16 +1,25 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "module": "ES6",
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
     "strict": true,
+    "esModuleInterop": true,
     "lib": [
       "ES2015",
       "ES2016",
       "ES2017",
       "ES2018"
     ]
-  }
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "./src/**/*"
+  ]
 }

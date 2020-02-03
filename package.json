@@ -4,7 +4,7 @@
   "description": "Roster builder for dropfleet commander wargame",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,12 @@
   },
   "homepage": "https://github.com/ivan-gerasin/dropfleet-commander-builder#readme",
   "dependencies": {
-    "typescript": "^3.7.5"
+    "@types/jest": "^25.1.1",
+    "@types/node": "^13.7.0",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.1.0",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   }
 }
