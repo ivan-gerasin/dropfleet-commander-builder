@@ -1,11 +1,10 @@
-import BattleGroup, {Group, TonnageSizingExtractor} from 'core/BattleGroup';
+import BattleGroup, {TonnageSizingExtractor} from 'core/BattleGroup';
 import BattleGroupType from 'core/BattleGroupType';
-import Faction from 'core/Faction';
+import Group from 'core/Group';
 import UnitFactory, {UNIT_1} from './mocks/units';
 import SizedBattleGroupType from 'core/SizedBattleGroupType';
 import GroupSizing from 'core/Sizing';
 import TonnageClass from 'core/TonnageClass';
-import Unit from 'core/Unit';
 
 describe('BattleGroup spec', () => {
 	const mkExtractor: (min: number, max: number) => TonnageSizingExtractor = (min: number, max: number) =>
@@ -79,13 +78,12 @@ describe('BattleGroup spec', () => {
 
 			const updated = instance.removeGroup(GROUP_1)
 			expect(updated.groups.length).toBe(1)
-		})
+		});
 
 		test('throw error if trying to remove required group', () => {
 			instance = new BattleGroup(sizedBattleGroupType, [GROUP_1], mkExtractor(1,3));
 			const executor = () => instance.removeGroup(GROUP_1)
 			expect(executor).toThrow()
 		});
-
 	})
 });
