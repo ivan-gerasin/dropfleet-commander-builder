@@ -53,6 +53,12 @@ export default class BattleGroup {
 		return this.groups.length;
 	}
 
+	get pointCost(): number {
+		return this.groups
+			.map((group: Group) => group.pointCost)
+			.reduce((acc, groupCost) => acc+groupCost)
+	}
+
 	addGroup(group: Group): BattleGroup {
 		if (this.canAddGroup(group)) {
 			return this.withUpdatedGroupList(this.groups.concat(group));

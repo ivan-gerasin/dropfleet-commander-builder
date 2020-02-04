@@ -1,5 +1,5 @@
 import BattleGroupType from 'core/BattleGroupType';
-import {GroupSizing} from 'core/Sizing';
+import GroupSizing from 'core/Sizing';
 
 enum GameSize {
 	Skirmish = 'Skirmish',
