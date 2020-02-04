@@ -18,10 +18,14 @@
   "homepage": "https://github.com/ivan-gerasin/dropfleet-commander-builder#readme",
   "dependencies": {
     "@types/jest": "^25.1.1",
+    "@types/lodash": "^4.14.149",
     "@types/node": "^13.7.0",
+    "@types/uuid": "^3.4.7",
     "jest": "^25.1.0",
+    "lodash": "^4.17.15",
     "ts-jest": "^25.1.0",
     "typescript": "^3.7.5",
+    "uuid": "^3.4.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
   }

@@ -9,7 +9,7 @@ type HullPoints = number
 type Armour = number
 type PointDefence = number
 export type GroupSize = number
-type PointCost = number
+export type PointCost = number
 
 export interface IUnitData {
 	name            : string

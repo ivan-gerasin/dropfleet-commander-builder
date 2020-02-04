@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
+    "target": "es5",
     "module": "ES6",
     "moduleResolution": "node",
     "noImplicitAny": true,

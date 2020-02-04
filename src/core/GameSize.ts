@@ -1,4 +1,5 @@
 import BattleGroupType from 'core/BattleGroupType';
+import {GroupSizing} from 'core/Sizing';
 
 enum GameSize {
 	Skirmish = 'Skirmish',
@@ -49,42 +50,23 @@ export function maxGroupsForGameSize(gameSize: GameSize): number {
 
 type GroupNumbersMapping = Map<BattleGroupType, GroupSizing>;
 
-class GroupSizing {
-
-	static size(max: number, min: number = 0): GroupSizing {
-		return new GroupSizing(max, min)
-	}
-
-	constructor(
-		readonly max: number,
-		readonly min: number = 0
-	) {
-		if (max < min) {
-			throw new RangeError('Maximal size can non be lesser than minimal size')
-		}
-		if (max < 0 || min < 0) {
-			throw new RangeError('Size can not be lesser than zero')
-		}
-	}
-}
-
 const SKIRMISH_GROUPS_NUMBERS: GroupNumbersMapping = new Map<BattleGroupType, GroupSizing>([
 	[BattleGroupType.Pathfinder,    GroupSizing.size(2)],
-	[BattleGroupType.Line,          GroupSizing.size(2,1)],
+	[BattleGroupType.Line,          GroupSizing.size(1,2)],
 	[BattleGroupType.Vanguard,      GroupSizing.size(1)],
 	[BattleGroupType.Flag,          GroupSizing.size(0)]
 ]);
 
 const CLASH_GROUPS_NUMBERS: GroupNumbersMapping = new Map<BattleGroupType, GroupSizing>([
-	[BattleGroupType.Pathfinder,    GroupSizing.size(2, 1)],
+	[BattleGroupType.Pathfinder,    GroupSizing.size(1, 2)],
 	[BattleGroupType.Line,          GroupSizing.size(3,1)],
 	[BattleGroupType.Vanguard,      GroupSizing.size(2)],
 	[BattleGroupType.Flag,          GroupSizing.size(1)]
 ]);
 
 const BATTLE_GROUPS_NUMBERS: GroupNumbersMapping = new Map<BattleGroupType, GroupSizing>([
-	[BattleGroupType.Pathfinder,   GroupSizing.size(3, 1)],
-	[BattleGroupType.Line,          GroupSizing.size(4,1)],
+	[BattleGroupType.Pathfinder,    GroupSizing.size(1, 3)],
+	[BattleGroupType.Line,          GroupSizing.size(1,4)],
 	[BattleGroupType.Vanguard,      GroupSizing.size(3)],
 	[BattleGroupType.Flag,          GroupSizing.size(2)]
 ]);
