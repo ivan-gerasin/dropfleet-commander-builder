@@ -31,7 +31,7 @@ const FLAG_TONNAGE_RESTRICTIONS = new Map<TonnageClass, GroupSizing>([
 
 
 type TonnageRestrictions = Map<TonnageClass, GroupSizing>
-const BATTLE_GROUP_TYPE_TONNAGE_RESTRICTIONS = new Map<BattleGroupType, TonnageRestrictions>([
+export const BATTLE_GROUP_TYPE_TONNAGE_RESTRICTIONS = new Map<BattleGroupType, TonnageRestrictions>([
 	[BattleGroupType.Pathfinder,    PATHFINDER_TONNAGE_RESTRICTIONS],
 	[BattleGroupType.Vanguard,      VANGUARD_TONNAGE_RESTRICTIONS],
 	[BattleGroupType.Line,          LINE_TONNAGE_RESTRICTIONS],
@@ -49,5 +49,7 @@ export function getTonnageSizingForBattleGroup(battleGroup: BattleGroupType, ton
 	}
 	throw ReferenceError(`Such battle group does not exists: ${battleGroup}`);
 }
+
+
 
 export default BattleGroupType

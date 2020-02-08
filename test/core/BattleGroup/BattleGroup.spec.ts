@@ -1,14 +1,14 @@
-import BattleGroup, {TonnageSizingExtractor} from 'core/BattleGroup';
+import BattleGroup from 'core/BattleGroup/BattleGroup';
 import BattleGroupType from 'core/BattleGroupType';
 import Group from 'core/Group';
-import UnitFactory, {UNIT_1} from './mocks/units';
+import MockRestrictionsExtractor from '../mocks/MockRestrictionsExtractor';
+import UnitFactory, {UNIT_1} from '../mocks/units';
 import SizedBattleGroupType from 'core/SizedBattleGroupType';
 import GroupSizing from 'core/Sizing';
 import TonnageClass from 'core/TonnageClass';
 
 describe('BattleGroup spec', () => {
-	const mkExtractor: (min: number, max: number) => TonnageSizingExtractor = (min: number, max: number) =>
-		(battleGroup: BattleGroupType, tonnage: TonnageClass): GroupSizing => new GroupSizing(max, min);
+	const mkExtractor = (min: number, max: number) => new MockRestrictionsExtractor(min, max)
 
 	const MAX_BATTLE_GROUP_SIZE = 3
 	const sizedBattleGroupType = new SizedBattleGroupType(BattleGroupType.Line, GroupSizing.size(1, MAX_BATTLE_GROUP_SIZE));
