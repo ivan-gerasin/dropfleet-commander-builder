@@ -17,10 +17,12 @@
   },
   "homepage": "https://github.com/ivan-gerasin/dropfleet-commander-builder#readme",
   "dependencies": {
+    "@types/hash-sum": "^1.0.0",
     "@types/jest": "^25.1.1",
     "@types/lodash": "^4.14.149",
     "@types/node": "^13.7.0",
     "@types/uuid": "^3.4.7",
+    "hash-sum": "^2.0.0",
     "jest": "^25.1.0",
     "lodash": "^4.17.15",
     "prettier": "^1.19.1",

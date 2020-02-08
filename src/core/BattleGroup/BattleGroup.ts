@@ -1,4 +1,4 @@
-import {ErrorOrNull, IValidated, IWithID, ValidationErrors} from 'core/CommonInterfaces';
+import {ErrorOrNull, IValidated, IWithID, ValidationError} from 'core/CommonInterfaces';
 import Group from 'core/Group';
 import SizedBattleGroupType from 'core/SizedBattleGroupType';
 import GroupSizing from 'core/Sizing';
@@ -39,7 +39,7 @@ export default class BattleGroup implements IWithID, IValidated{
 		return this.tonnageRestrictionsExtractor.getTonnageSizingForBattleGroup(this.groupType.type, group.unit.tonnage)
 	}
 
-	getGroupsWithTonnage(tonnage: TonnageClass): Array<Group> {
+	getGroupsWithTonnage = (tonnage: TonnageClass): Array<Group> => {
 		return this.groups.filter((group: Group) => group.unit.tonnage === tonnage)
 	}
 
@@ -71,7 +71,7 @@ export default class BattleGroup implements IWithID, IValidated{
 	}
 
 
-	validate(): Array<ValidationErrors> {
+	validate(): Array<ValidationError> {
 		const validators = [
 			this.validateGroupSize
 		]

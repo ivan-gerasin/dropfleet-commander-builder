@@ -1,6 +1,8 @@
+import {IWithHash} from 'core/CommonInterfaces';
 import Faction from 'core/Faction';
 import UnitSpecialTrait from 'core/UnitSpecialTrait';
 import TonnageClass from 'core/TonnageClass';
+import hashSum from 'hash-sum';
 
 type ScanRange = number
 type SignatureRange = number
@@ -26,7 +28,7 @@ export interface IUnitData {
 	special         : Array<UnitSpecialTrait>
 }
 
-class Unit {
+class Unit implements IWithHash {
 
 	static build(unitData: IUnitData) {
 		const {
@@ -48,6 +50,8 @@ class Unit {
 		);
 	}
 
+	readonly hash: string;
+
 	constructor(
 		readonly name: string,
 		readonly faction: Faction,
@@ -61,7 +65,9 @@ class Unit {
 		readonly tonnage: TonnageClass,
 		readonly pointCost: PointCost,
 		readonly special: Array<UnitSpecialTrait> = []
-	) {}
+	) {
+		this.hash = hashSum(`${name}_${faction}_${pointCost}`)
+	}
 }
 
 export default Unit

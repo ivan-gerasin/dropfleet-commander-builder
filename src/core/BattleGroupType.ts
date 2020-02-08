@@ -38,6 +38,13 @@ export const BATTLE_GROUP_TYPE_TONNAGE_RESTRICTIONS = new Map<BattleGroupType, T
 	[BattleGroupType.Flag,          FLAG_TONNAGE_RESTRICTIONS]
 ])
 
+export const BATTLE_GROUP_TOTAL_SIZE_RESTRICTIONS = new Map<BattleGroupType, number>([
+	[BattleGroupType.Pathfinder,    3],
+	[BattleGroupType.Vanguard,      3],
+	[BattleGroupType.Line,          3],
+	[BattleGroupType.Flag,          2]
+])
+
 export function getTonnageSizingForBattleGroup(battleGroup: BattleGroupType, tonnage: TonnageClass): GroupSizing {
 	const battleGroupTonnageMap = BATTLE_GROUP_TYPE_TONNAGE_RESTRICTIONS.get(battleGroup)
 	if (battleGroupTonnageMap) {

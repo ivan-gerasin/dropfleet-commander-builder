@@ -14,7 +14,7 @@ export default class MockRestrictionsExtractor implements ITonnageRestrictionsEx
 		this.sizing = GroupSizing.size(min, max)
 	}
 
-	getTonnageSizingForBattleGroup(type: BattleGroupType, tonnage: TonnageClass): GroupSizing {
+	getTonnageSizingForBattleGroup = (type: BattleGroupType, tonnage: TonnageClass): GroupSizing => {
 		return this.sizing
 	}
 
