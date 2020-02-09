@@ -1,15 +1,17 @@
-import {ErrorOrNull, IValidated, IWithID, ValidationError} from 'core/CommonInterfaces';
-import Group from 'core/Group';
+import BattleGroupValidator from 'core/BattleGroup/BattleGroupValidator';
+import {IValidated, IWithID, ValidationError} from 'core/CommonInterfaces';
+import Group from 'core/Group/Group';
 import SizedBattleGroupType from 'core/SizedBattleGroupType';
 import GroupSizing from 'core/Sizing';
 import TonnageClass from 'core/TonnageClass';
 import ITonnageRestrictionsExtractor from 'core/TonnageRestrictionsExtractor';
-import {compact, filter, map, without, zipObject} from 'lodash';
+import {without} from 'lodash';
 import uuid from 'uuid/v4';
 
-export default class BattleGroup implements IWithID, IValidated{
+export default class BattleGroup implements IWithID, IValidated {
 
 	readonly id = uuid();
+	private readonly validator = new BattleGroupValidator()
 
 	constructor(
 		readonly groupType: SizedBattleGroupType,
@@ -61,22 +63,8 @@ export default class BattleGroup implements IWithID, IValidated{
 		return this.validate().length === 0
 	}
 
-	private validateGroupSize(): ErrorOrNull {
-		const currentSize = this.size;
-		const maxSize = this.groupType.max;
-		if (this.size >= this.groupType.max) {
-			return `Group size more than allowed: ${currentSize} presented but only ${maxSize} allowed`
-		}
-		return null
-	}
-
-
 	validate(): Array<ValidationError> {
-		const validators = [
-			this.validateGroupSize
-		]
-		const errors = validators.map((validator) => validator());
-		return compact(errors);
+		return this.validator.validate(this)
 	}
 
 	addGroup(group: Group): BattleGroup {

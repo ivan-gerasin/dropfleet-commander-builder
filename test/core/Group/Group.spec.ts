@@ -1,5 +1,5 @@
-import Group from 'core/Group';
-import UnitFactory, {UNIT_1} from './mocks/units';
+import Group from 'core/Group/Group';
+import {UNIT_1} from '../mocks/units';
 
 describe('Group', () => {
 

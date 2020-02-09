@@ -1,7 +1,7 @@
 import BattleGroup from 'core/BattleGroup/BattleGroup';
 import BattleGroupValidator from 'core/BattleGroup/BattleGroupValidator';
 import BattleGroupType from 'core/BattleGroupType';
-import Group from 'core/Group';
+import Group from 'core/Group/Group';
 import TonnageClass from 'core/TonnageClass';
 import MockRestrictionsExtractor from '../mocks/MockRestrictionsExtractor';
 import SizedBattleGroupType from 'core/SizedBattleGroupType';
@@ -106,6 +106,33 @@ describe('BattleGroupValidator', () => {
 		expect(errors[0]).toContain(
 			`${EXAMPLE_FORBIDDEN_TONNAGE_CLASS} tonnage class is forbidden in ${group.groupType.type} battle group type`
 		)
+	})
+
+	test('Internal validation: group validator called', () => {
+		const UNIT_1 = UnitFactory({name: 'Unit 1', groupSize: 3})
+		const UNIT_2 = UnitFactory({name: 'Unit 2', groupSize: 2})
+		const UNIT_3 = UnitFactory({name: 'Unit 3', groupSize: 1})
+
+		const MIN_SIZE = 1;
+		const OVERSIZED_UNIT_SIZE = 5;
+		const LESS_THAN_MIN_SIZE = 0;
+		const GROUP_1 = Group.build(UNIT_1, OVERSIZED_UNIT_SIZE)
+		const GROUP_2 = Group.build(UNIT_2, LESS_THAN_MIN_SIZE)
+		const GROUP_3 = Group.build(UNIT_3, MIN_SIZE)
+
+		extractor = mkExtractor(MIN_GROUPS_NUM, MAX_GROUPS_NUM)
+		extractor.allowedClasses = [UNIT_1.tonnage]
+		group = new BattleGroup(
+			sizedBattleGroupType,
+			[GROUP_1, GROUP_2, GROUP_3],
+			extractor
+		)
+
+		const errors = instance.validate(group)
+		expect(errors).toHaveLength(2)
+		const errorStr = errors.join(' | ')
+		expect(errorStr).toContain(`Group of ${UNIT_1.name} have size ${OVERSIZED_UNIT_SIZE} but maximum is ${UNIT_1.groupSize}`)
+		expect(errorStr).toContain(`Group of ${UNIT_2.name} have size ${LESS_THAN_MIN_SIZE} but minimum is ${MIN_SIZE}`)
 	})
 
 })

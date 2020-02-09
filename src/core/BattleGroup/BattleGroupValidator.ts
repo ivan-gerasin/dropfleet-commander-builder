@@ -1,7 +1,7 @@
 import BattleGroup from 'core/BattleGroup/BattleGroup';
 import BattleGroupType from 'core/BattleGroupType';
 import {ErrorOrNull, IClassValidator, ValidationError} from 'core/CommonInterfaces';
-import Group from 'core/Group';
+import Group from 'core/Group/Group';
 import GroupSizing from 'core/Sizing';
 import TonnageClass from 'core/TonnageClass';
 import {TonnageSizingExtrator} from 'core/TonnageRestrictionsExtractor';
@@ -15,8 +15,17 @@ export default class BattleGroupValidator implements IClassValidator<BattleGroup
 		return compact(flatten([
 			this.validateTonnageMinMaxRestrictions(battleGroup),
 			this.validateTonnageTypes(battleGroup),
-			this.validateMaximumGroupsNumber(battleGroup)
+			this.validateMaximumGroupsNumber(battleGroup),
+			this.validateUnitGroup(battleGroup)
 		]))
+	}
+
+	private validateUnitGroup(battleGroup: BattleGroup): Array<ValidationError> {
+		return compact(
+			flatten(
+				battleGroup.groups.map((group: Group) => group.validate())
+			)
+		)
 	}
 
 	private validateMaximumGroupsNumber(that: BattleGroup): ErrorOrNull {

@@ -2,8 +2,9 @@ export interface IWithID {
 	readonly id : string
 }
 
-export interface IWithHash {
+export interface IWithHash<T> {
 	readonly hash: string
+	isEq: (item: T) => boolean
 }
 
 export interface IValidated {

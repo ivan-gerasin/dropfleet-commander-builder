@@ -28,7 +28,7 @@ export interface IUnitData {
 	special         : Array<UnitSpecialTrait>
 }
 
-class Unit implements IWithHash {
+class Unit implements IWithHash<Unit> {
 
 	static build(unitData: IUnitData) {
 		const {
@@ -67,6 +67,10 @@ class Unit implements IWithHash {
 		readonly special: Array<UnitSpecialTrait> = []
 	) {
 		this.hash = hashSum(`${name}_${faction}_${pointCost}`)
+	}
+
+	isEq(item: Unit): boolean {
+		return this.hash === item.hash
 	}
 }
 

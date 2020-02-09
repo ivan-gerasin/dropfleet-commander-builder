@@ -1,12 +1,14 @@
-import {IWithHash} from 'core/CommonInterfaces';
+import {IValidated, IWithHash, ValidationError} from 'core/CommonInterfaces';
+import GroupValidator from 'core/Group/GroupValidator';
 import uuid from 'uuid/v4';
 import hashSum from 'hash-sum';
 
 import Unit, {GroupSize, PointCost} from 'core/Unit';
 
-export default class Group implements IWithHash {
+export default class Group implements IWithHash<Group>, IValidated {
 	readonly id = uuid();
 	readonly hash: string;
+	private readonly validator = new GroupValidator()
 	constructor(
 		readonly unit: Unit,
 		readonly size: GroupSize = 1
@@ -18,10 +20,6 @@ export default class Group implements IWithHash {
 		return new Group(unit, size);
 	}
 
-	// get hash(): string {
-	// 	return this._hash
-	// }
-
 	private changeSize(size: GroupSize): Group {
 		return new Group(this.unit, size);
 	}
@@ -32,6 +30,18 @@ export default class Group implements IWithHash {
 
 	get pointCost(): PointCost {
 		return this.unit.pointCost * this.size
+	}
+
+	isEq(group: Group): boolean {
+		return this.hash === group.hash
+	}
+
+	get isValid(): boolean {
+		return this.validate().length === 0;
+	}
+
+	validate(): Array<ValidationError> {
+		return this.validator.validate(this)
 	}
 
 	increaseGroupSize(): Group {

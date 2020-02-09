@@ -1,6 +1,6 @@
 import BattleGroup from 'core/BattleGroup/BattleGroup';
 import BattleGroupType from 'core/BattleGroupType';
-import Group from 'core/Group';
+import Group from 'core/Group/Group';
 import MockRestrictionsExtractor from '../mocks/MockRestrictionsExtractor';
 import UnitFactory, {UNIT_1} from '../mocks/units';
 import SizedBattleGroupType from 'core/SizedBattleGroupType';
