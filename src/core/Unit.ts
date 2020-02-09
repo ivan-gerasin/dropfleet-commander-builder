@@ -1,5 +1,6 @@
 import {IWithHash} from 'core/CommonInterfaces';
 import Faction from 'core/Faction';
+import ShipClass from 'core/ShipClass';
 import UnitSpecialTrait from 'core/UnitSpecialTrait';
 import TonnageClass from 'core/TonnageClass';
 import hashSum from 'hash-sum';
@@ -25,6 +26,7 @@ export interface IUnitData {
 	groupSize       : GroupSize
 	tonnage         : TonnageClass
 	pointCost       : PointCost
+	shipClass       : ShipClass
 	special         : Array<UnitSpecialTrait>
 }
 
@@ -32,7 +34,8 @@ class Unit implements IWithHash<Unit> {
 
 	static build(unitData: IUnitData) {
 		const {
-			name, faction, scan, signature, thrust, hull, armor, pointDefence, groupSize, tonnage, pointCost, special
+			name, faction, scan, signature, thrust, hull, armor,
+			pointDefence, groupSize, tonnage, pointCost, shipClass, special
 		} = unitData;
 		return new Unit(
 			name,
@@ -46,6 +49,7 @@ class Unit implements IWithHash<Unit> {
 			groupSize,
 			tonnage,
 			pointCost,
+			shipClass,
 			special
 		);
 	}
@@ -64,6 +68,7 @@ class Unit implements IWithHash<Unit> {
 		readonly groupSize: GroupSize,
 		readonly tonnage: TonnageClass,
 		readonly pointCost: PointCost,
+		readonly shipClass: ShipClass,
 		readonly special: Array<UnitSpecialTrait> = []
 	) {
 		this.hash = hashSum(`unit_${name}_${faction}_${pointCost}`)
