@@ -4,7 +4,8 @@
   "description": "Roster builder for dropfleet commander wargame",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint **/*.ts --fix"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,11 @@
     "@types/lodash": "^4.14.149",
     "@types/node": "^13.7.0",
     "@types/uuid": "^3.4.7",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.18.3",
     "hash-sum": "^2.0.0",
     "jest": "^25.1.0",
     "lodash": "^4.17.15",
@@ -31,5 +37,8 @@
     "uuid": "^3.4.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
   }
 }

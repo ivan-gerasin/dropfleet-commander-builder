@@ -1,5 +1,5 @@
-import GroupSizing from 'core/Sizing';
-import TonnageClass from 'core/TonnageClass';
+import GroupSizing from 'core/Sizing'
+import TonnageClass from 'core/TonnageClass'
 
 enum BattleGroupType {
 	Pathfinder = 'Pathfinder',
@@ -9,8 +9,8 @@ enum BattleGroupType {
 }
 
 const PATHFINDER_TONNAGE_RESTRICTIONS = new Map<TonnageClass, GroupSizing>([
-	[TonnageClass.Light, GroupSizing.size(1,3)],
-	[TonnageClass.Medium, GroupSizing.size(1)],
+	[TonnageClass.Light, GroupSizing.size(1, 3)],
+	[TonnageClass.Medium, GroupSizing.size(1)]
 ])
 
 const VANGUARD_TONNAGE_RESTRICTIONS = new Map<TonnageClass, GroupSizing>([
@@ -21,28 +21,27 @@ const VANGUARD_TONNAGE_RESTRICTIONS = new Map<TonnageClass, GroupSizing>([
 
 const LINE_TONNAGE_RESTRICTIONS = new Map<TonnageClass, GroupSizing>([
 	[TonnageClass.Light, GroupSizing.size(2)],
-	[TonnageClass.Medium, GroupSizing.size(1, 3)],
+	[TonnageClass.Medium, GroupSizing.size(1, 3)]
 ])
 
 const FLAG_TONNAGE_RESTRICTIONS = new Map<TonnageClass, GroupSizing>([
 	[TonnageClass.Light, GroupSizing.size(1)],
-	[TonnageClass.SuperHeavy, GroupSizing.size(1, 2)],
+	[TonnageClass.SuperHeavy, GroupSizing.size(1, 2)]
 ])
-
 
 type TonnageRestrictions = Map<TonnageClass, GroupSizing>
 export const BATTLE_GROUP_TYPE_TONNAGE_RESTRICTIONS = new Map<BattleGroupType, TonnageRestrictions>([
-	[BattleGroupType.Pathfinder,    PATHFINDER_TONNAGE_RESTRICTIONS],
-	[BattleGroupType.Vanguard,      VANGUARD_TONNAGE_RESTRICTIONS],
-	[BattleGroupType.Line,          LINE_TONNAGE_RESTRICTIONS],
-	[BattleGroupType.Flag,          FLAG_TONNAGE_RESTRICTIONS]
+	[BattleGroupType.Pathfinder, PATHFINDER_TONNAGE_RESTRICTIONS],
+	[BattleGroupType.Vanguard, VANGUARD_TONNAGE_RESTRICTIONS],
+	[BattleGroupType.Line, LINE_TONNAGE_RESTRICTIONS],
+	[BattleGroupType.Flag, FLAG_TONNAGE_RESTRICTIONS]
 ])
 
 export const BATTLE_GROUP_TOTAL_SIZE_RESTRICTIONS = new Map<BattleGroupType, number>([
-	[BattleGroupType.Pathfinder,    3],
-	[BattleGroupType.Vanguard,      3],
-	[BattleGroupType.Line,          3],
-	[BattleGroupType.Flag,          2]
+	[BattleGroupType.Pathfinder, 3],
+	[BattleGroupType.Vanguard, 3],
+	[BattleGroupType.Line, 3],
+	[BattleGroupType.Flag, 2]
 ])
 
 export function getTonnageSizingForBattleGroup(battleGroup: BattleGroupType, tonnage: TonnageClass): GroupSizing {
@@ -54,9 +53,7 @@ export function getTonnageSizingForBattleGroup(battleGroup: BattleGroupType, ton
 		}
 		throw ReferenceError(`Battle group ${battleGroup} does not allow groups with tonnage ${tonnage}`)
 	}
-	throw ReferenceError(`Such battle group does not exists: ${battleGroup}`);
+	throw ReferenceError(`Such battle group does not exists: ${battleGroup}`)
 }
-
-
 
 export default BattleGroupType

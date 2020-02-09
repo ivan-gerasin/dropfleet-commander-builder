@@ -1,20 +1,18 @@
-import BattleGroup from 'core/BattleGroup/BattleGroup';
-import BattleGroupType from 'core/BattleGroupType';
-import Faction from 'core/Faction';
-import GameSize from 'core/GameSize';
-import MockRestrictionsExtractor from '../mocks/MockRestrictionsExtractor';
-import Roster from 'core/Roster/Roster';
-import SizedBattleGroupType from 'core/SizedBattleGroupType';
-import GroupSizing from 'core/Sizing';
+import BattleGroup from 'core/BattleGroup/BattleGroup'
+import BattleGroupType from 'core/BattleGroupType'
+import Faction from 'core/Faction'
+import GameSize from 'core/GameSize'
+import MockRestrictionsExtractor from '../mocks/MockRestrictionsExtractor'
+import Roster from 'core/Roster/Roster'
+import SizedBattleGroupType from 'core/SizedBattleGroupType'
+import GroupSizing from 'core/Sizing'
 
 describe('Roster', () => {
-	const mkExtractor = (min: number, max: number) => new MockRestrictionsExtractor(min, max)
-	const sizedBattleGroupType = new SizedBattleGroupType(
-		BattleGroupType.Line, GroupSizing.size(1, 5)
-	);
+	const mkExtractor = (min: number, max: number): MockRestrictionsExtractor => new MockRestrictionsExtractor(min, max)
+	const sizedBattleGroupType = new SizedBattleGroupType(BattleGroupType.Line, GroupSizing.size(1, 5))
 
-	let roster;
-	const BG_1 = new BattleGroup(sizedBattleGroupType, [], mkExtractor(1,3));
+	let roster
+	const BG_1 = new BattleGroup(sizedBattleGroupType, [], mkExtractor(1, 3))
 
 	test('gameSize method return game size enum value', () => {
 		roster = new Roster('test', 999, Faction.PHR)
@@ -34,7 +32,6 @@ describe('Roster', () => {
 		expect(roster.battleGroups.length).toBe(1)
 	})
 
-
 	test('battleGroups return copy of internal value', () => {
 		roster = new Roster('test', 999, Faction.PHR)
 		roster.addBattleGroup(BG_1)
@@ -49,5 +46,4 @@ describe('Roster', () => {
 		expect(roster.removeBattleGroup(BG_1)).toBe(roster)
 		expect(roster.battleGroups.length).toBe(0)
 	})
-
 })

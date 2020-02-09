@@ -1,7 +1,7 @@
-import BattleGroupType from 'core/BattleGroupType';
-import GroupSizing from 'core/Sizing';
-import TonnageClass from 'core/TonnageClass';
-import {getTonnageSizingForBattleGroup, BATTLE_GROUP_TYPE_TONNAGE_RESTRICTIONS} from 'core/BattleGroupType'
+import BattleGroupType from 'core/BattleGroupType'
+import GroupSizing from 'core/Sizing'
+import TonnageClass from 'core/TonnageClass'
+import { getTonnageSizingForBattleGroup, BATTLE_GROUP_TYPE_TONNAGE_RESTRICTIONS } from 'core/BattleGroupType'
 
 export type TonnageSizingExtrator = (type: BattleGroupType, tonnage: TonnageClass) => GroupSizing
 export type AllowedTonnageExtrator = (battleGroup: BattleGroupType) => Array<TonnageClass>
@@ -10,8 +10,7 @@ export default interface ITonnageRestrictionsExtractor {
 	getAllowedTonnageClass: AllowedTonnageExtrator
 }
 
-
-export class BasicTonnageRestrictionsExtractor implements ITonnageRestrictionsExtractor{
+export class BasicTonnageRestrictionsExtractor implements ITonnageRestrictionsExtractor {
 	getTonnageSizingForBattleGroup(type: BattleGroupType, tonnage: TonnageClass): GroupSizing {
 		return getTonnageSizingForBattleGroup(type, tonnage)
 	}
@@ -20,7 +19,6 @@ export class BasicTonnageRestrictionsExtractor implements ITonnageRestrictionsEx
 		if (battleGroupTonnageMap) {
 			return Array.from(battleGroupTonnageMap.keys())
 		}
-		throw ReferenceError(`Such battle group does not exists: ${group}`);
+		throw ReferenceError(`Such battle group does not exists: ${group}`)
 	}
 }
-

@@ -1,20 +1,16 @@
-import BattleGroup from 'core/BattleGroup/BattleGroup';
-import {IValidated, IWithID} from 'core/CommonInterfaces';
-import Faction from 'core/Faction';
-import GameSize, {defineGameSize} from 'core/GameSize';
-import RosterValidator from 'core/Roster/RosterValidator';
-import {without} from 'lodash'
-import uuid from 'uuid/v4';
+import BattleGroup from 'core/BattleGroup/BattleGroup'
+import { IValidated, IWithID } from 'core/CommonInterfaces'
+import Faction from 'core/Faction'
+import GameSize, { defineGameSize } from 'core/GameSize'
+import RosterValidator from 'core/Roster/RosterValidator'
+import { without } from 'lodash'
+import uuid from 'uuid/v4'
 
 export default class Roster implements IWithID, IValidated {
-	readonly id = uuid();
-	private validator = new RosterValidator();
+	readonly id = uuid()
+	private validator = new RosterValidator()
 
-	constructor(
-		public name: string,
-		readonly points: number,
-		readonly faction: Faction
-	) {}
+	constructor(public name: string, readonly points: number, readonly faction: Faction) {}
 
 	private _battleGroups: Array<BattleGroup> = []
 
@@ -23,9 +19,8 @@ export default class Roster implements IWithID, IValidated {
 	}
 
 	get isValid(): boolean {
-		return this.validate().length === 0;
+		return this.validate().length === 0
 	}
-
 
 	validate(): Array<RosterValidationError> {
 		return this.validator.validate(this)
@@ -35,16 +30,15 @@ export default class Roster implements IWithID, IValidated {
 		return this._battleGroups.concat()
 	}
 
-	addBattleGroup(group: BattleGroup) {
+	addBattleGroup(group: BattleGroup): Roster {
 		this._battleGroups = this._battleGroups.concat(group)
 		return this
 	}
 
-	removeBattleGroup(group: BattleGroup) {
+	removeBattleGroup(group: BattleGroup): Roster {
 		this._battleGroups = without(this._battleGroups, group)
 		return this
 	}
-
 }
 
 type RosterValidationError = string

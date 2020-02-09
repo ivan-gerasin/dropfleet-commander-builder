@@ -15,7 +15,6 @@ enum ShipClass {
 	CloudFlier,
 	HomeShip,
 
-
 	LightCruiser,
 	AssaultTroopship,
 	VanguardCarrier,
@@ -31,7 +30,6 @@ enum ShipClass {
 	Battleship,
 	Dreadnought,
 	SuperCarrier
-
 }
 
 export default ShipClass

@@ -1,27 +1,26 @@
-import BattleGroupValidator from 'core/BattleGroup/BattleGroupValidator';
-import {IValidated, IWithID, ValidationError} from 'core/CommonInterfaces';
-import Group from 'core/Group/Group';
-import SizedBattleGroupType from 'core/SizedBattleGroupType';
-import GroupSizing from 'core/Sizing';
-import TonnageClass from 'core/TonnageClass';
-import ITonnageRestrictionsExtractor from 'core/TonnageRestrictionsExtractor';
-import {without} from 'lodash';
-import uuid from 'uuid/v4';
+import BattleGroupValidator from 'core/BattleGroup/BattleGroupValidator'
+import { IValidated, IWithID, ValidationError } from 'core/CommonInterfaces'
+import Group from 'core/Group/Group'
+import SizedBattleGroupType from 'core/SizedBattleGroupType'
+import GroupSizing from 'core/Sizing'
+import TonnageClass from 'core/TonnageClass'
+import ITonnageRestrictionsExtractor from 'core/TonnageRestrictionsExtractor'
+import { without } from 'lodash'
+import uuid from 'uuid/v4'
 
 export default class BattleGroup implements IWithID, IValidated {
-
-	readonly id = uuid();
+	readonly id = uuid()
 	private readonly validator = new BattleGroupValidator()
 
 	constructor(
 		readonly groupType: SizedBattleGroupType,
 		readonly groups: Array<Group> = [],
 		readonly tonnageRestrictionsExtractor: ITonnageRestrictionsExtractor
-	){}
+	) {}
 
 	private canAddGroup(group: Group): boolean {
 		if (this.size >= this.groupType.max) {
-			return false;
+			return false
 		}
 		const groupsWithTonnage = this.getGroupsWithTonnage(group.unit.tonnage)
 		const sizing = this.getSizingForGroup(group)
@@ -50,13 +49,11 @@ export default class BattleGroup implements IWithID, IValidated {
 	}
 
 	get size(): number {
-		return this.groups.length;
+		return this.groups.length
 	}
 
 	get pointCost(): number {
-		return this.groups
-			.map((group: Group) => group.pointCost)
-			.reduce((acc, groupCost) => acc+groupCost)
+		return this.groups.map((group: Group) => group.pointCost).reduce((acc, groupCost) => acc + groupCost)
 	}
 
 	get isValid(): boolean {
@@ -80,23 +77,21 @@ export default class BattleGroup implements IWithID, IValidated {
 	}
 
 	unsafeAddGroup(group: Group): BattleGroup {
-		return this.withUpdatedGroupList(this.groups.concat(group));
+		return this.withUpdatedGroupList(this.groups.concat(group))
 	}
 
 	removeGroup(group: Group): BattleGroup {
 		if (this.canRemoveGroup(group)) {
-			return this.unsafeRemoveGroup(group);
+			return this.unsafeRemoveGroup(group)
 		}
 		throw new Error('Can not remove group from battle group')
 	}
 
 	unsafeRemoveGroup(group: Group): BattleGroup {
-		const updateGroups = without(this.groups, group);
+		const updateGroups = without(this.groups, group)
 		if (updateGroups.length == this.groups.length) {
 			throw new Error('DO NOT IGNORE: unsafeRemoveGroup method is not working')
 		}
-		return this.withUpdatedGroupList(updateGroups);
+		return this.withUpdatedGroupList(updateGroups)
 	}
-
 }
-

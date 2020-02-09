@@ -1,5 +1,5 @@
-import uuid from 'uuid/v4';
-import WeaponSpecialTrait from 'core/WeaponSpecialTrait';
+import uuid from 'uuid/v4'
+import WeaponSpecialTrait from 'core/WeaponSpecialTrait'
 
 type Lock = number
 type Attack = number
@@ -7,21 +7,20 @@ type Damage = number
 type Arc = string
 
 export interface IWeapon {
-	name: string,
-	lock: Lock,
-	attack: Attack,
-	damage: Damage,
-	arc: Arc,
+	name: string
+	lock: Lock
+	attack: Attack
+	damage: Damage
+	arc: Arc
 	special: Array<WeaponSpecialTrait>
 }
 
 export default class Weapon {
-
 	readonly id = uuid()
 
-	static build(weaponStruct: IWeapon) {
-		const { name, lock, attack, damage, arc, special } = weaponStruct;
-		return new Weapon(name, lock, attack, damage, arc, special);
+	static build(weaponStruct: IWeapon): Weapon {
+		const { name, lock, attack, damage, arc, special } = weaponStruct
+		return new Weapon(name, lock, attack, damage, arc, special)
 	}
 
 	constructor(
@@ -31,5 +30,5 @@ export default class Weapon {
 		readonly damage: Damage,
 		readonly arc: Arc,
 		readonly special: Array<WeaponSpecialTrait> = []
-	){}
+	) {}
 }

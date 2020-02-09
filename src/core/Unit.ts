@@ -1,9 +1,9 @@
-import {IWithHash} from 'core/CommonInterfaces';
-import Faction from 'core/Faction';
-import ShipClass from 'core/ShipClass';
-import UnitSpecialTrait from 'core/UnitSpecialTrait';
-import TonnageClass from 'core/TonnageClass';
-import hashSum from 'hash-sum';
+import { IWithHash } from 'core/CommonInterfaces'
+import Faction from 'core/Faction'
+import ShipClass from 'core/ShipClass'
+import UnitSpecialTrait from 'core/UnitSpecialTrait'
+import TonnageClass from 'core/TonnageClass'
+import hashSum from 'hash-sum'
 
 type ScanRange = number
 type SignatureRange = number
@@ -15,28 +15,38 @@ export type GroupSize = number
 export type PointCost = number
 
 export interface IUnitData {
-	name            : string
-	faction         : Faction
-	scan            : ScanRange
-	signature       : SignatureRange
-	thrust          : Thrust
-	hull            : HullPoints
-	armor           : Armour
-	pointDefence    : PointDefence
-	groupSize       : GroupSize
-	tonnage         : TonnageClass
-	pointCost       : PointCost
-	shipClass       : ShipClass
-	special         : Array<UnitSpecialTrait>
+	name: string
+	faction: Faction
+	scan: ScanRange
+	signature: SignatureRange
+	thrust: Thrust
+	hull: HullPoints
+	armor: Armour
+	pointDefence: PointDefence
+	groupSize: GroupSize
+	tonnage: TonnageClass
+	pointCost: PointCost
+	shipClass: ShipClass
+	special: Array<UnitSpecialTrait>
 }
 
 class Unit implements IWithHash<Unit> {
-
-	static build(unitData: IUnitData) {
+	static build(unitData: IUnitData): Unit {
 		const {
-			name, faction, scan, signature, thrust, hull, armor,
-			pointDefence, groupSize, tonnage, pointCost, shipClass, special
-		} = unitData;
+			name,
+			faction,
+			scan,
+			signature,
+			thrust,
+			hull,
+			armor,
+			pointDefence,
+			groupSize,
+			tonnage,
+			pointCost,
+			shipClass,
+			special
+		} = unitData
 		return new Unit(
 			name,
 			faction,
@@ -51,10 +61,10 @@ class Unit implements IWithHash<Unit> {
 			pointCost,
 			shipClass,
 			special
-		);
+		)
 	}
 
-	readonly hash: string;
+	readonly hash: string
 
 	constructor(
 		readonly name: string,

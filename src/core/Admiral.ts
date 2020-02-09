@@ -1,11 +1,10 @@
-import {IWithHash} from 'core/CommonInterfaces';
-import Faction from 'core/Faction';
-import GameSize from 'core/GameSize';
-import hashSum from 'hash-sum';
+import { IWithHash } from 'core/CommonInterfaces'
+import Faction from 'core/Faction'
+import GameSize from 'core/GameSize'
+import hashSum from 'hash-sum'
 
-export default class Admiral implements IWithHash<Admiral>{
-
-	readonly hash: string;
+export default class Admiral implements IWithHash<Admiral> {
+	readonly hash: string
 
 	constructor(
 		readonly faction: Faction,
@@ -20,5 +19,4 @@ export default class Admiral implements IWithHash<Admiral>{
 	isEq(group: Admiral): boolean {
 		return this.hash === group.hash
 	}
-
 }

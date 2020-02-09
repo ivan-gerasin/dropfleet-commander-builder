@@ -1,5 +1,5 @@
 export interface IWithID {
-	readonly id : string
+	readonly id: string
 }
 
 export interface IWithHash<T> {
@@ -8,12 +8,12 @@ export interface IWithHash<T> {
 }
 
 export interface IValidated {
-	validate    : () => Array<ValidationError>
-	isValid     : boolean
+	validate: () => Array<ValidationError>
+	isValid: boolean
 }
 
 export interface IClassValidator<T> {
-	validate    : (instance: T) => Array<ValidationError>
+	validate: (instance: T) => Array<ValidationError>
 }
 
 export type ValidationError = string
