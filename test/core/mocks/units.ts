@@ -1,3 +1,4 @@
+import ShipClass from 'core/ShipClass';
 import {defaults} from 'lodash';
 
 import Faction from 'core/Faction';
@@ -16,6 +17,7 @@ export const UNIT_1 = Unit.build({
 	groupSize: 3,
 	tonnage: TonnageClass.Heavy,
 	pointCost: 1,
+	shipClass: ShipClass.Cruiser,
 	special: []
 });
 
@@ -30,6 +32,7 @@ const defaultUnitData = {
 	pointDefence: 1,
 	groupSize: 3,
 	tonnage: TonnageClass.Light,
+	shipClass: ShipClass.Frigate,
 	pointCost: 1,
 	special: []
 };

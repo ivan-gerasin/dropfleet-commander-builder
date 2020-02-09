@@ -12,7 +12,6 @@ export default class RosterValidator implements IClassValidator<Roster> {
 		]);
 	}
 
-
 	private validatePointCost(that: Roster): ErrorOrNull {
 		const total = that.battleGroups
 			.map((group: BattleGroup) => group.pointCost)
