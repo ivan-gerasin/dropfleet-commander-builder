@@ -66,7 +66,7 @@ class Unit implements IWithHash<Unit> {
 		readonly pointCost: PointCost,
 		readonly special: Array<UnitSpecialTrait> = []
 	) {
-		this.hash = hashSum(`${name}_${faction}_${pointCost}`)
+		this.hash = hashSum(`unit_${name}_${faction}_${pointCost}`)
 	}
 
 	isEq(item: Unit): boolean {

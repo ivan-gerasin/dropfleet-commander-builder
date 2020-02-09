@@ -18,3 +18,4 @@ export interface IClassValidator<T> {
 
 export type ValidationError = string
 export type ErrorOrNull = string | null
+export type Nullable<T> = T | null

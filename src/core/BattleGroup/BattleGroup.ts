@@ -63,6 +63,11 @@ export default class BattleGroup implements IWithID, IValidated {
 		return this.validate().length === 0
 	}
 
+	get strategyRating(): number {
+		throw new Error('Not implemented')
+		return 0
+	}
+
 	validate(): Array<ValidationError> {
 		return this.validator.validate(this)
 	}
