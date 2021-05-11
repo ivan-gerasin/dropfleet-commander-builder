@@ -30,7 +30,7 @@
     "eslint-plugin-react": "^7.18.3",
     "hash-sum": "^2.0.0",
     "jest": "^25.1.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "prettier": "^1.19.1",
     "ts-jest": "^25.1.0",
     "typescript": "^3.7.5",
